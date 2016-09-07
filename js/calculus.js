@@ -39,7 +39,7 @@ Calculus.prototype.initEvents = function () {
     var self = this;
 
     this.param.element.onkeypress = function (e) {
-//        console.log(String.fromCharCode(e.keyCode));
+
         if (e.keyCode === 13) {
             self.setValue();
         }
