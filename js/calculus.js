@@ -47,9 +47,8 @@ Calculus.prototype.initEvents = function () {
 
     this.param.element.oninput = function (e) {
         var value = self.param.input.value;
-        var rep = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%*.](?=[-+%*.])/;
-        var dbOperat = /[0-9]+[-+%^*/]{1}[0-9]+[-+%^*/]{1}/g;
-//        var rep2 = /-?[0-9]+\.?([0-9]+)?([-+%^*/]{1})?-?([0-9]+)?\.?([0-9]+)?/;
+        var rep = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%*./](?=[-+%*./])/;
+        var dbOperat = /([-+%^*/]{1})?[0-9]+[-+%^*/]{1}[0-9]+[-+%^*/]{1}/g;
 
         if (rep.test(self.param.input.value)) {
             value = value.replace(rep, '');
@@ -57,7 +56,9 @@ Calculus.prototype.initEvents = function () {
         }
 
         if (dbOperat.test(self.param.input.value)) {
-            value = value.replace(dbOperat, '');
+            value = value.replace(dbOperat, function (e) {
+                return value.substring(0, value.length - 1);
+            });
             self.param.input.value = value;
         }
     };
