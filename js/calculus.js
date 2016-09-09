@@ -49,6 +49,7 @@ Calculus.prototype.initEvents = function () {
         var value = self.param.input.value;
         var rep = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%*./](?=[-+%*./])/;
         var dbOperat = /([-+%^*/]{1})?[0-9]+[-+%^*/]{1}[0-9]+[-+%^*/]{1}/g;
+        var dbPointProtect = /([-+%^*/]{1})?\d+[-+%^*/]{1}\d+[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\./g
 
         if (rep.test(self.param.input.value)) {
             value = value.replace(rep, '');
