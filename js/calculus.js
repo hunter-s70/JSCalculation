@@ -7,7 +7,8 @@ var Calculus = function (calculusId) {
     if (!calculusId) return;
 
     this.param = {
-        element     : document.getElementById(calculusId)
+        element     : document.getElementById(calculusId),
+        result      : ''
     };
 
     this.renderTerminal();
@@ -23,13 +24,16 @@ Calculus.prototype.initEvents = function () {
 
     var self = this;
 
+    //output
     this.param.element.onkeypress = function (e) {
-
         if (e.keyCode === 13) {
             self.getValue();
+            self.setResult();
+            console.log(self.param);
         }
     };
 
+    //input
     this.param.element.oninput = function (e) {
         var value = self.param.input.value;
         var repSimbolsBan = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%^*./](?=[-+%^*./])/;
@@ -47,26 +51,29 @@ Calculus.prototype.initEvents = function () {
             self.param.input.value = value;
         }
     };
+
+    this.param.element.onkeydown = function (e) {
+        if (self.param.result !== '') {
+            self.param.result = '';
+            self.param.input.value = '';
+        }
+    }
 };
 
 Calculus.prototype.getValue = function () {
-    this.param.inputValue = this.param.input.value;
-    this.divideString();
-};
-
-Calculus.prototype.divideString = function () {
     var repDivider = /[/%^*+-]/g,
-        numsArr = this.param.inputValue.split(repDivider);
+        numsArr = this.param.input.value.split(repDivider);
 
-    this.param.simbolsArr = this.param.inputValue.match(repDivider);
-    this.param.numsArr = numsArr.map(function (item) {
-        return +item;
-    });
-
-    this.defineFunction();
+    this.param.simbolsArr = this.param.input.value.match(repDivider);
+    this.param.numsArr = numsArr.map( function (item){return +item} );
 };
 
-Calculus.prototype.defineFunction = function () {
+Calculus.prototype.setResult = function () {
+    this.param.result = this.calculateFunction();
+    this.param.input.value = this.param.result;
+};
+
+Calculus.prototype.calculateFunction = function () {
     var numsArr = this.param.numsArr,
         lengtSimbolshArr = this.param.simbolsArr.length;
 
@@ -75,26 +82,22 @@ Calculus.prototype.defineFunction = function () {
 
     switch (this.param.simbolsArr[lengtSimbolshArr-1]) {
         case "+":
-            this.summ(numsArr);
-            console.log(this.summ(numsArr));
+            return this.summ(numsArr);
             break;
         case "-":
-            this.mins(numsArr);
-            console.log(this.mins(numsArr));
+            return this.mins(numsArr);
             break;
         case "/":
-            this.divs(numsArr);
-            console.log(this.divs(numsArr));
+            return this.divs(numsArr);
             break;
         case "*":
-            this.mult(numsArr);
-            console.log(this.mult(numsArr));
+            return this.mult(numsArr);
             break;
         case "^":
-            this.sqrt(numsArr);
+            return this.sqrt(numsArr);
             break;
         case "%":
-            this.mods(numsArr);
+            return this.mods(numsArr);
             break;
     }
 };
@@ -116,9 +119,9 @@ Calculus.prototype.divs = function (numsArr) {
 };
 
 Calculus.prototype.sqrt = function (numsArr) {
-    alert('sqrt');
+    return Math.pow(numsArr[0], numsArr[1]);
 };
 
 Calculus.prototype.mods = function (numsArr) {
-    alert('mods');
+    return numsArr[0] % numsArr[1];
 };
