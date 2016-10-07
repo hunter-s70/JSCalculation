@@ -37,7 +37,7 @@ Calculus.prototype.initEvents = function () {
     this.param.element.oninput = function (e) {
         var value = self.param.input.value;
         var repSimbolsBan = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%^*./](?=[-+%^*./])/;
-        var dbPointProtect = /([-+%^*/]{1})?\d+(\.\d+)?[-+%^*/]{1}\d+(\.\d+)?[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\./g;
+        var dbPointProtect = /([-+%^*/]{1})?\d+(\.\d+)?[-+%^*/]{1}\d+(\.\d+)?[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\.|[-+%^*/]{1}\d+[-+%^*/]{1}|\.\d+\./g;
 
         if (repSimbolsBan.test(self.param.input.value)) {
             value = value.replace(repSimbolsBan, '');
