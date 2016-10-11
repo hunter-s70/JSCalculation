@@ -15,7 +15,7 @@
 
 .b-calc__btn-wrap {
     margin: 10px auto;
-    padding: 5px;
+    padding: 10px 5px;
     width: 100%;
     background: #fff;
     border-radius: 4px;
@@ -23,8 +23,14 @@
 }
 
 .b-calc__btn {
-    background: #7071FA;
+    background: rgba(115, 116, 255, 0.57);
     padding: 3px 10px;
+    margin: 2px;
     box-sizing: border-box;
     border-radius: 6px;
+}
+
+.b-calc__btn:hover {
+    background: rgba(115, 116, 255, 0.8);
+    cursor: pointer;
 }

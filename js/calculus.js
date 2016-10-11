@@ -28,8 +28,13 @@ Calculus.prototype.renderTerminal = function () {
 };
 
 Calculus.prototype.renderCaclBtns = function () {
-
-    return '<span class="b-calc__btn">1</span>';
+    this.param.btns = this.param.btns.map(function(item) {
+        return '<span class="b-calc__btn">'+item+'</span>'
+    });
+    return this.param.btns.join('');
+//    for (var i=2; i<9; i+=1) {
+//        return '<span class="b-calc__btn">'+i+'</span>';
+//    }
 };
 
 Calculus.prototype.initEvents = function () {
