@@ -1,0 +1,30 @@
+.b-calc {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    background: #CBD0AF;
+    border-radius: 8px;
+}
+
+.b-calc__input {
+    width: 100%;
+    font: 40px 'Geo', sans-serif;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.b-calc__btn-wrap {
+    margin: 10px auto;
+    padding: 5px;
+    width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.b-calc__btn {
+    background: #7071FA;
+    padding: 3px 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}

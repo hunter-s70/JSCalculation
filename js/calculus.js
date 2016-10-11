@@ -8,7 +8,8 @@ var Calculus = function (calculusId) {
 
     this.param = {
         element     : document.getElementById(calculusId),
-        result      : ''
+        result      : '',
+        btns        : ['^','%','+','-','*','/','.']
     };
 
     this.renderTerminal();
@@ -16,8 +17,19 @@ var Calculus = function (calculusId) {
 };
 
 Calculus.prototype.renderTerminal = function () {
-    this.param.element.innerHTML = '<input id="b-calc__input" type="text" maxlength="24" autofocus>';
+    this.param.element.innerHTML =
+    '<div class="b-calc">'+
+        '<input id="b-calc__input" class="b-calc__input" type="text" maxlength="24" autofocus>'+
+        '<div class="b-calc__btn-wrap j-btn-wrap">' +
+            this.renderCaclBtns()+
+        '</div>'+
+    '</div>';
     this.param.input = document.getElementById('b-calc__input');
+};
+
+Calculus.prototype.renderCaclBtns = function () {
+
+    return '<span class="b-calc__btn">1</span>';
 };
 
 Calculus.prototype.initEvents = function () {
