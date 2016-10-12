@@ -23,8 +23,11 @@
 }
 
 .b-calc__btn {
+    width: 36px;
+    text-align: center;
+    display: inline-block;
     background: rgba(115, 116, 255, 0.57);
-    padding: 3px 10px;
+    padding: 3px 0;
     margin: 2px;
     box-sizing: border-box;
     border-radius: 6px;

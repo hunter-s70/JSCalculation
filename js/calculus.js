@@ -9,7 +9,7 @@ var Calculus = function (calculusId) {
     this.param = {
         element     : document.getElementById(calculusId),
         result      : '',
-        btns        : ['^','%','+','-','*','/','.']
+        btns        : ['0','1','2','3','4','5','6','7','8','9','^','%','+','-','*','/','.','=']
     };
 
     this.renderTerminal();
@@ -32,9 +32,6 @@ Calculus.prototype.renderCaclBtns = function () {
         return '<span class="b-calc__btn">'+item+'</span>'
     });
     return this.param.btns.join('');
-//    for (var i=2; i<9; i+=1) {
-//        return '<span class="b-calc__btn">'+i+'</span>';
-//    }
 };
 
 Calculus.prototype.initEvents = function () {
