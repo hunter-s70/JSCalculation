@@ -1,6 +1,6 @@
 .b-calc {
     width: 400px;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 20px 10px;
     background: #CBD0AF;
     border-radius: 8px;
@@ -14,6 +14,9 @@
 }
 
 .b-calc__btn-wrap {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
     margin: 10px auto;
     padding: 10px 5px;
     width: 100%;
@@ -23,6 +26,7 @@
 }
 
 .b-calc__btn {
+    flex: 0 1 auto;
     width: 36px;
     text-align: center;
     display: inline-block;
