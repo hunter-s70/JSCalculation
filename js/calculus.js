@@ -24,12 +24,14 @@ Calculus.prototype.renderTerminal = function () {
             this.renderCaclBtns()+
         '</div>'+
     '</div>';
+
     this.param.input = document.getElementById('b-calc__input');
+    this.param.btnWrapp = document.querySelector('.j-btn-wrap');
 };
 
 Calculus.prototype.renderCaclBtns = function () {
-    this.param.btns = this.param.btns.map(function(item) {
-        return '<span class="b-calc__btn">'+item+'</span>'
+    this.param.btns = this.param.btns.map(function(item, i) {
+        return '<span class="b-calc__btn m-calc__btn_'+i+'">'+item+'</span>'
     });
     return this.param.btns.join('');
 };
@@ -45,6 +47,14 @@ Calculus.prototype.initEvents = function () {
             self.setResult();
             console.log(self.param);
         }
+    };
+
+    //input width buttons
+    this.param.btnWrapp.onclick = function (e) {
+        var value = self.param.input.value;
+        self.param.input.value = value + e.target.innerHTML;
+        console.log(value);
+        console.log(e.target.innerHTML);
     };
 
     //input
@@ -66,6 +76,7 @@ Calculus.prototype.initEvents = function () {
         }
     };
 
+    //clear type field
     this.param.element.onkeydown = function (e) {
         if (self.param.result !== '') {
             self.param.result = '';
