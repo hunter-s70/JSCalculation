@@ -18,6 +18,7 @@ var Calculus = function (calculusId) {
     this.initEvents();
 };
 
+
 Calculus.prototype.renderTerminal = function () {
     this.param.element.innerHTML =
     '<div class="b-calc">'+
@@ -31,12 +32,14 @@ Calculus.prototype.renderTerminal = function () {
     this.param.btnWrapp = document.querySelector('.j-btn-wrap');
 };
 
+
 Calculus.prototype.renderCaclBtns = function () {
     this.param.btns = this.param.btns.map(function(item, i) {
         return '<span class="b-calc__btn m-calc__btn_'+i+'">'+item+'</span>'
     });
     return this.param.btns.join('');
 };
+
 
 Calculus.prototype.initEvents = function () {
 
@@ -53,29 +56,15 @@ Calculus.prototype.initEvents = function () {
 
     //input width buttons
     this.param.btnWrapp.onclick = function (e) {
+        if (e.target.className.search(/j-btn-wrap/) !== -1) return;
         var value = self.param.input.value;
         self.param.input.value = value + e.target.innerHTML;
-        console.log(value);
-        console.log(e.target.innerHTML);
+        self.validate(self.param.input.value);
     };
 
     //input
-    this.param.element.oninput = function (e) {
-        var value = self.param.input.value;
-        var repSimbolsBan = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%^*./](?=[-+%^*./])/;
-        var dbPointProtect = /([-+%^*/]{1})?\d+(\.\d+)?[-+%^*/]{1}\d+(\.\d+)?[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\.|[-+%^*/]{1}\d+[-+%^*/]{1}|\.\d+\./g;
-
-        if (self.param.repSimbolsBan.test(self.param.input.value)) {
-            value = value.replace(self.param.repSimbolsBan, '');
-            self.param.input.value = value;
-        }
-
-        if (self.param.dbPointProtect.test(self.param.input.value)) {
-            value = value.replace(self.param.dbPointProtect, function (e) {
-                return value.substring(0, value.length - 1);
-            });
-            self.param.input.value = value;
-        }
+    this.param.element.oninput = function () {
+        self.validate(self.param.input.value);
     };
 
     //clear type field
@@ -87,6 +76,22 @@ Calculus.prototype.initEvents = function () {
     }
 };
 
+
+Calculus.prototype.validate = function (inputValue) {
+    if (this.param.repSimbolsBan.test(this.param.input.value)) {
+        inputValue = inputValue.replace(this.param.repSimbolsBan, '');
+        this.param.input.value = inputValue;
+    }
+
+    if (this.param.dbPointProtect.test(this.param.input.value)) {
+        inputValue = inputValue.replace(this.param.dbPointProtect, function (e) {
+            return inputValue.substring(0, inputValue.length - 1);
+        });
+        this.param.input.value = inputValue;
+    }
+};
+
+
 Calculus.prototype.getValue = function () {
     var repDivider = /[/%^*+-]/g,
         numsArr = this.param.input.value.split(repDivider);
@@ -95,10 +100,12 @@ Calculus.prototype.getValue = function () {
     this.param.numsArr = numsArr.map( function (item){return +item} );
 };
 
+
 Calculus.prototype.setResult = function () {
     this.param.result = this.calculateFunction();
     this.param.input.value = this.param.result;
 };
+
 
 Calculus.prototype.calculateFunction = function () {
     var numsArr = this.param.numsArr,
@@ -128,6 +135,7 @@ Calculus.prototype.calculateFunction = function () {
             break;
     }
 };
+
 
 Calculus.prototype.summ = function (numsArr) {
     return numsArr[0] + numsArr[1];
