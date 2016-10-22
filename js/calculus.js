@@ -7,9 +7,11 @@ var Calculus = function (calculusId) {
     if (!calculusId) return;
 
     this.param = {
-        element     : document.getElementById(calculusId),
-        result      : '',
-        btns        : ['0','1','2','3','4','5','6','7','8','9','^','%','+','-','*','/','.','=']
+        element             : document.getElementById(calculusId),
+        result              : '',
+        repSimbolsBan       : /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%^*./](?=[-+%^*./])/,
+        dbPointProtect      : /([-+%^*/]{1})?\d+(\.\d+)?[-+%^*/]{1}\d+(\.\d+)?[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\.|[-+%^*/]{1}\d+[-+%^*/]{1}|\.\d+\./g,
+        btns                : ['0','1','2','3','4','5','6','7','8','9','^','%','+','-','*','/','.','=']
     };
 
     this.renderTerminal();
@@ -63,13 +65,13 @@ Calculus.prototype.initEvents = function () {
         var repSimbolsBan = /[\\\?\|\s\}\]\[\{=_;:"',!)(<>@№#$&~`ёЁa-zA-Zа-яА-Я]|[-+%^*./](?=[-+%^*./])/;
         var dbPointProtect = /([-+%^*/]{1})?\d+(\.\d+)?[-+%^*/]{1}\d+(\.\d+)?[-+%^*/]{1}|([-+%^*/]{1})?\d+\.\d+\.|([-+%^*/]{1})?\d+(\.)?\d+[-+%^*/]{1}\d+\.\d+\.|[-+%^*/]{1}\d+[-+%^*/]{1}|\.\d+\./g;
 
-        if (repSimbolsBan.test(self.param.input.value)) {
-            value = value.replace(repSimbolsBan, '');
+        if (self.param.repSimbolsBan.test(self.param.input.value)) {
+            value = value.replace(self.param.repSimbolsBan, '');
             self.param.input.value = value;
         }
 
-        if (dbPointProtect.test(self.param.input.value)) {
-            value = value.replace(dbPointProtect, function (e) {
+        if (self.param.dbPointProtect.test(self.param.input.value)) {
+            value = value.replace(self.param.dbPointProtect, function (e) {
                 return value.substring(0, value.length - 1);
             });
             self.param.input.value = value;
