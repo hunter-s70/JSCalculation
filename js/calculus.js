@@ -54,12 +54,28 @@ Calculus.prototype.initEvents = function () {
         }
     };
 
+    //Turn range in the end
+    this.param.input.onclick = function (el) {
+        var valueLength = self.param.input.value.length;
+
+        self.param.input.setSelectionRange(valueLength, valueLength);
+    };
+
     //input width buttons
     this.param.btnWrapp.onclick = function (e) {
-        if (e.target.className.search(/j-btn-wrap/) !== -1) return;
-        var value = self.param.input.value;
-        self.param.input.value = value + e.target.innerHTML;
-        self.validate(self.param.input.value);
+        self.clearField();
+        if (e.target.className.search(/j-btn-wrap/) === -1) {
+            var value = self.param.input.value;
+            self.param.input.value = value + e.target.innerHTML;
+            self.validate(self.param.input.value);
+        } else {
+            return;
+        }
+
+        if (e.target.innerHTML === '=') {
+            self.getValue();
+            self.setResult();
+        }
     };
 
     //input
@@ -69,10 +85,8 @@ Calculus.prototype.initEvents = function () {
 
     //clear type field
     this.param.element.onkeydown = function (e) {
-        if (self.param.result !== '') {
-            self.param.result = '';
-            self.param.input.value = '';
-        }
+        if (e.keyCode < 40  && e.keyCode > 36) return false;
+        self.clearField();
     }
 };
 
@@ -110,9 +124,6 @@ Calculus.prototype.setResult = function () {
 Calculus.prototype.calculateFunction = function () {
     var numsArr = this.param.numsArr,
         lengtSimbolshArr = this.param.simbolsArr.length;
-
-    console.log(this.param.simbolsArr);
-    console.log(this.param.numsArr);
 
     switch (this.param.simbolsArr[lengtSimbolshArr-1]) {
         case "+":
@@ -159,4 +170,11 @@ Calculus.prototype.sqrt = function (numsArr) {
 
 Calculus.prototype.mods = function (numsArr) {
     return numsArr[0] % numsArr[1];
+};
+
+Calculus.prototype.clearField = function () {
+    if (this.param.result !== '') {
+        this.param.result = '';
+        this.param.input.value = '';
+    }
 };
