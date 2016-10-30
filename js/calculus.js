@@ -46,7 +46,8 @@ Calculus.prototype.initEvents = function () {
     var self = this;
 
     //output
-    this.param.element.onkeypress = function (e) {
+    window.onkeypress = function (e) {
+        self.param.input.focus();
         if (e.keyCode === 13) {
             self.getValue();
             self.setResult();
@@ -55,7 +56,7 @@ Calculus.prototype.initEvents = function () {
     };
 
     //Turn range in the end
-    this.param.input.onclick = function (el) {
+    this.param.input.onclick = function () {
         var valueLength = self.param.input.value.length;
 
         self.param.input.setSelectionRange(valueLength, valueLength);
@@ -84,7 +85,7 @@ Calculus.prototype.initEvents = function () {
     };
 
     //clear type field
-    this.param.element.onkeydown = function (e) {
+    window.onkeydown = function (e) {
         if (e.keyCode < 40  && e.keyCode > 36) return false;
         self.clearField();
     }
