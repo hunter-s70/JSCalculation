@@ -51,7 +51,6 @@ Calculus.prototype.initEvents = function () {
         if (e.keyCode === 13) {
             self.getValue();
             self.setResult();
-            console.log(self.param);
         }
     };
 
@@ -172,6 +171,7 @@ Calculus.prototype.sqrt = function (numsArr) {
 Calculus.prototype.mods = function (numsArr) {
     return numsArr[0] % numsArr[1];
 };
+
 
 Calculus.prototype.clearField = function () {
     if (this.param.result !== '') {

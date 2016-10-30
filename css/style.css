@@ -2,7 +2,7 @@
     width: 400px;
     margin: 10px auto;
     padding: 20px 10px;
-    background: #8b9394;
+    background: rgba(139, 147, 148, 1);
     border-radius: 8px;
 }
 
@@ -20,7 +20,7 @@
     margin: 10px auto;
     padding: 10px 5px;
     width: 100%;
-    background: #fff;
+    background: rgba(255, 255, 255, 1);
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -30,7 +30,7 @@
     width: 36px;
     text-align: center;
     display: inline-block;
-    background: rgba(115, 116, 255, 0.57);
+    background: rgba(115, 116, 255, .57);
     padding: 3px 0;
     margin: 2px;
     box-sizing: border-box;
@@ -38,6 +38,6 @@
 }
 
 .b-calc__btn:hover {
-    background: rgba(115, 116, 255, 0.8);
+    background: rgba(115, 116, 255, .8);
     cursor: pointer;
 }
